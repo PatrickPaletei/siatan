@@ -14,11 +14,14 @@ return new class extends Migration
         Schema::create('user_action', function (Blueprint $table) {
             $table->id('user_action_id');
             $table->unsignedBigInteger('user_id');
-            $table->text('action');
+            $table->unsignedBigInteger('surat_id');
+            $table->unsignedBigInteger('bidang_id');
             $table->timestamps();
 
             // Menambahkan constraint foreign key
             $table->foreign('user_id')->references('user_id')->on('user');
+            $table->foreign('surat_id')->references('surat_id')->on('surat');
+            $table->foreign('bidang_id')->references('bidang_id')->on('bidang');
         });
     }
 
