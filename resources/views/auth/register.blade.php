@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SI-ATAN Registration</title>
     <link rel="stylesheet" href="/css/register.css">
-    <!-- <script>
+    <script>
         function validateForm(event) {
             var password = document.getElementById("password").value;
             var confirmPassword = document.getElementById("confirm-password").value;
@@ -17,7 +17,7 @@
             }
             return true; // Allow form submission
         }
-    </script> -->
+    </script>
 </head>
 <body>
     <div class="container">
@@ -34,6 +34,15 @@
                 
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" required>
+
+                <label for="bidang">Bidang</label>
+                <select id="bidang" name="bidang_id" required>
+                    <option value="" selected disabled>Pilih Bidang</option>
+                    @foreach($bidang as $b)
+                        <option value="{{ $b->bidang_id }}">{{ $b->nama_bidang }}</option>
+                    @endforeach
+                </select>
+                
                 
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" required>
@@ -42,7 +51,7 @@
                 <input type="password" id="confirm-password" name="confirm_password" required>
                 
                 <button type="submit">Daftar</button>
-                <p>Sudah punya akun? <a href="login.html">Login sekarang</a></p>
+                <p>Sudah punya akun? <a href="{{route('login')}}">Login sekarang</a></p>
             </form>
         </div>
     </div>

@@ -13,14 +13,10 @@ return new class extends Migration
     {
         Schema::create('surat', function (Blueprint $table) {
             $table->id('surat_id');
-            $table->unsignedBigInteger('user_id');
             $table->string('judul_surat');
             $table->date('tanggal_surat');
             $table->text('isi_surat');
             $table->timestamps();
-
-            // Menambahkan constraint foreign key
-            $table->foreign('user_id')->references('user_id')->on('user');
         });
     }
 

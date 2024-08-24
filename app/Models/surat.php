@@ -9,10 +9,10 @@ class surat extends Model
 {
     use HasFactory;
     protected $table = 'surat';
+    protected $primaryKey = 'surat_id';
     protected $fillable = [
         'judul_surat',
         'tanggal_surat',
-        'user_id',
         'isi_surat'
     ];
 }

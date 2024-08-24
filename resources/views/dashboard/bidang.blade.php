@@ -24,11 +24,23 @@
         <div class="main-content">
             <h2>5 BIDANG DINAS KESEHATAN</h2>
             <ul>
+                @if($bidangId == 1)
+                <li id="sekretariat">Sekretariat</li>
+                @elseif($bidangId == 2)
+                <li id="kesmas">Kesehatan Masyarakat</li>
+                @elseif($bidangId == 3)
+                <li id="p2p">Pencegahan dan Pengendalian Penyakit</li>
+                @elseif($bidangId == 4)
+                <li id="pelkes">Pelayanan Kesehatan</li>
+                @elseif($bidangId == 5)
+                <li id="sdk">Sumber Daya Kesehatan</li>
+                @else
                 <li id="sekretariat">Sekretariat</li>
                 <li id="kesmas">Kesehatan Masyarakat</li>
                 <li id="p2p">Pencegahan dan Pengendalian Penyakit</li>
                 <li id="pelkes">Pelayanan Kesehatan</li>
                 <li id="sdk">Sumber Daya Kesehatan</li>
+                @endif
             </ul>
         </div>
     </div>

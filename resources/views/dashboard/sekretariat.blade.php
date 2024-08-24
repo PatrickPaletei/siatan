@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SI-ATAN - Upload Surat</title>
     <link rel="stylesheet" href="/css/sekretariat.css">
+    <!-- <meta name="csrf-token" content="{{ csrf_token() }}"> -->
 </head>
 <body>
     <div class="profile-container">
@@ -24,7 +25,8 @@
         </div>
         <div class="main-content">
             <h2>UPLOAD SURAT</h2>
-            <form action="#" method="post" enctype="multipart/form-data" id="uploadForm">
+            <form method="post" enctype="multipart/form-data" id="uploadForm" action="{{ route('sekretariatPost') }}">
+                @csrf
                 <label for="sub-bagian">Sub Bagian</label>
                 <select id="sub-bagian" name="sub-bagian">
                     <option value="" selected disabled>Pilih sub bagian</option>
@@ -38,14 +40,22 @@
                 <label for="jenis-surat">Jenis Surat</label>
                 <input type="text" id="jenis-surat" name="jenis-surat">
 
-                <label for="nama-surat">Nama Surat</label>
-                <input type="text" id="nama-surat" name="nama-surat">
+                <label for="nama-surat">Judul Surat</label>
+                <input type="text" id="nama-surat" name="judul_surat"
+                @error('judul_surat') is-invalid @enderror">
+                @error('judul_surat')
+                    <p >{{ $message }}</p>
+                @enderror
 
-                <label for="tanggal-upload">Tanggal Upload</label>
-                <input type="date" id="tanggal-upload" name="tanggal-upload">
+                <label for="tanggal-upload">Tanggal Upload Surat</label>
+                <input type="date" id="tanggal-upload" name="tanggal_surat" 
+                @error('tanggal_surat') is-invalid @enderror">
+                @error('tanggal_surat')
+                    <p >{{ $message }}</p>
+                @enderror
 
                 <label for="file-upload">File Upload</label>
-                <input type="file" id="file-upload" name="file-upload">
+                <input type="file" id="file-upload" name="file">
                 
                 <div class="buttons">
                     <button type="submit">Upload</button>
@@ -53,13 +63,10 @@
             </form>
         </div>
     </div>
-
-    <script>
-        document.getElementById('uploadForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Mencegah submit form secara default
-            window.location.href = 'proses.html'; // Arahkan ke halaman proses upload
-        });
-    </script>
-
+    @if (session('berhasil'))
+        <script>
+            alert("{{ session('berhasil') }}");
+        </script>
+    @endif
 </body>
 </html>

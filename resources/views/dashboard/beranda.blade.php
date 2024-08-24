@@ -17,6 +17,10 @@
                 <ul>
                     <li><a href="home.html" class="nav-link" id="home-link">Home</a></li>
                     <li><a href="{{route('bidang')}}" class="nav-link" id="bidang-link">Beranda</a></li>
+                    <form action="{{route('logout')}}" method="post">
+                        @csrf
+                        <button type="submit">Logout</button>
+                    </form>
                     <li class="profile">
                         <img src="/asset/profile.png" alt="profil login" class="profile-pic">
                     </li>

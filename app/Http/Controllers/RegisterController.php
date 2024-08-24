@@ -4,13 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\user;
+use App\Models\bidang;
 use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
     public function index()
     {
-        return view('auth/register');
+        $bidang = bidang::all();
+        return view('auth/register',[
+            'bidang'=>$bidang
+        ]
+    );
     }
 
     public function store(Request $request)
@@ -19,7 +24,8 @@ class RegisterController extends Controller
          $request->validate([
             'name' => 'required|max:255',
             'email' => 'required|email:dns|unique:user',
-            'password' => 'required|min:5' 
+            'password' => 'required|min:5',
+            'bidang_id' => 'required' 
         ],[
             'name.required' => 'Field nama wajib diisi',
             'email.required' => 'Field email wajib diisi',
@@ -31,6 +37,7 @@ class RegisterController extends Controller
         $user = new user;
         $user->nama_lengkap = $request->name;
         $user->email = $request->email;
+        $user->bidang_id = $request->bidang_id;
         $user->role = 'user';
         $user->password = Hash::make($request->password);
         $user->save();

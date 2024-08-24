@@ -8,6 +8,8 @@ class BidangController extends Controller
 {
     public function index()
     {
-        return view('dashboard/bidang');
+        $data = auth()->user();
+        $bidangId = $data->bidang_id;
+        return view('dashboard/bidang',compact('bidangId'));
     }
 }

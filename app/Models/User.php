@@ -16,7 +16,10 @@ class user extends Authenticatable
         'name',
         'email',
         'password',
+        'bidang_id'
     ];
-    
+    public function bidang(){
+        return $this -> belongsTo (bidang::class);
+    }
 }
 

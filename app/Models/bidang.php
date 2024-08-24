@@ -10,4 +10,7 @@ class bidang extends Model
     use HasFactory;
     protected $table = 'bidang';
     
+    public function user(){
+        return $this -> belongsTo (user::class);
+    }
 }
