@@ -28,16 +28,20 @@
             <h2>UPLOAD SURAT</h2>
             <form id="uploadForm" action="{{ route('kesmasPost') }}" method="post" enctype="multipart/form-data">
                 @csrf
-                <label for="sub-bagian">Sub Bagian</label>
-                <select id="sub-bagian" name="sub-bagian">
+                <label for="sub-bagian">Sub Bidang</label>
+                <select id="sub-bagian" name="sub_bidang_id">
                     <option value="" selected disabled>Pilih sub bagian</option>
-                    <option value="Promosi Kesehatan dan Pemberdayaan Masyarakat">Promosi Kesehatan dan Pemberdayaan Masyarakat</option>
-                    <option value="Kesga dan Gizi Masyarakat">Kesga dan Gizi Masyarakat</option>
-                    <option value="Administrator Kesehatan Ahli Muda">Administrator Kesehatan Ahli Muda</option>
+                    @foreach($sub_bidang as $b)
+                    <option value="{{ $b->sub_bidang_id }}">{{ $b->nama_sub_bidang }}</option>
+                    @endforeach
                 </select>
 
                 <label for="jenis-surat">Jenis Surat</label>
-                <input type="text" id="jenis-surat" name="jenis-surat">
+                <select id="sub-bagian" name="jenis_surat">
+                    <option value="" selected disabled>Pilih Jenis Surat</option>
+                    <option value="Surat Keluar">Surat Keluar</option>
+                    <option value="Surat Masuk">Surat Masuk</option>
+                </select>
 
                 <label for="nama-surat">Judul Surat</label>
                 <input type="text" id="nama-surat" name="judul_surat"

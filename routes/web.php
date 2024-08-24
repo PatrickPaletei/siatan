@@ -44,6 +44,10 @@ Route::post('dashboard/pencegahanDanPengendalianPenyakit/upload', [P2pController
 
 Route::get('dashboard/pelayananKesehatan', [PelayananKesehatanController::class, 'index'])->name('pelkes');
 
+Route::post('dashboard/pelayananKesehatan/upload', [PelayananKesehatanController::class, 'store'])->name('pelkesPost');
+
 Route::get('dashboard/sumberDayaKesehatan', [SumberDayaKesehatanController::class, 'index'])->name('sdk');
+
+Route::post('dashboard/sumberDayaKesehatan/upload', [SumberDayaKesehatanController::class, 'store'])->name('sdkPost');
 
 Route::get('dashboard/lihatSurat', [LihatSuratController::class, 'index'])->name('lihatSurat');

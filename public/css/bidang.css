@@ -122,3 +122,8 @@ body {
     background-color: #061D4A; /* Ubah warna saat diklik */
     transform: scale(0.98); /* Sedikit mengecilkan elemen saat diklik */
 }
+
+.disabled {
+    pointer-events:none; 
+    opacity:0.6;         
+}

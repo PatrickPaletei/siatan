@@ -19,9 +19,8 @@ return new class extends Migration
             $table->string('nama_lengkap');
             $table->unsignedBigInteger('bidang_id');
             $table->timestamps();
+            $table->foreign('bidang_id')->references('bidang_id')->on('bidang');
         });
-
-        $table->foreign('bidang_id')->references('bidang_id')->on('bidang');
     }
 
     /**

@@ -24,26 +24,39 @@
         </div>
         <div class="main-content">
             <h2>UPLOAD SURAT</h2>
-            <form id="uploadForm" action="#" method="post" enctype="multipart/form-data">
-                <label for="sub-bagian">Sub Bagian</label>
-                <select id="sub-bagian" name="sub-bagian">
+            <form method="post" enctype="multipart/form-data" id="uploadForm" action="{{ route('pelkesPost') }}">
+                @csrf
+                <label for="sub-bagian">Sub Bidang</label>
+                <select id="sub-bagian" name="sub_bidang_id">
                     <option value="" selected disabled>Pilih sub bagian</option>
-                    <option value="Pelayanan Kesehatan Primer">Pelayanan Kesehatan Primer</option>
-                    <option value="Pelayanan Kesehatan Rujukan">Pelayanan Kesehatan Rujukan</option>
-                    <option value="Pembiayaan dan Jaminan Kesehatan">Pembiayaan dan Jaminan Kesehatan</option>
+                    @foreach($sub_bidang as $b)
+                    <option value="{{ $b->sub_bidang_id }}">{{ $b->nama_sub_bidang }}</option>
+                    @endforeach
                 </select>
 
                 <label for="jenis-surat">Jenis Surat</label>
-                <input type="text" id="jenis-surat" name="jenis-surat">
+                <select id="sub-bagian" name="jenis_surat">
+                    <option value="" selected disabled>Pilih Jenis Surat</option>
+                    <option value="Surat Keluar">Surat Keluar</option>
+                    <option value="Surat Masuk">Surat Masuk</option>
+                </select>
 
-                <label for="nama-surat">Nama Surat</label>
-                <input type="text" id="nama-surat" name="nama-surat">
+                <label for="nama-surat">Judul Surat</label>
+                <input type="text" id="nama-surat" name="judul_surat"
+                    @error('judul_surat') is-invalid @enderror">
+                @error('judul_surat')
+                <p>{{ $message }}</p>
+                @enderror
 
-                <label for="tanggal-upload">Tanggal Upload</label>
-                <input type="date" id="tanggal-upload" name="tanggal-upload">
+                <label for="tanggal-upload">Tanggal Upload Surat</label>
+                <input type="date" id="tanggal-upload" name="tanggal_surat"
+                    @error('tanggal_surat') is-invalid @enderror">
+                @error('tanggal_surat')
+                <p>{{ $message }}</p>
+                @enderror
 
                 <label for="file-upload">File Upload</label>
-                <input type="file" id="file-upload" name="file-upload">
+                <input type="file" id="file-upload" name="file">
                 
                 <div class="buttons">
                     <button type="submit">Upload</button>
@@ -52,11 +65,10 @@
         </div>
     </div>
 
+    @if (session('berhasil'))
     <script>
-        document.getElementById('uploadForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Mencegah submit form secara default
-            window.location.href = 'proses.html'; // Arahkan ke halaman proses upload
-        });
+        alert("{{ session('berhasil') }}");
     </script>
+    @endif
 </body>
 </html>

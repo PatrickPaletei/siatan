@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bidang', function (Blueprint $table) {
-            $table->id('bidang_id');
-            $table->string('nama_bidang');
-            $table->text('deskripsi_bidang');
+        Schema::create('sub_bidang', function (Blueprint $table) {
+            $table->id('sub_bidang_id');
+            $table->string('nama_sub_bidang');
+            $table->unsignedBigInteger('bidang_id');
             $table->timestamps();
+            $table->foreign('bidang_id')->references('bidang_id')->on('bidang');
         });
     }
 
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::drop('bidang');
+        Schema::drop('sub_bidang');
     }
 };

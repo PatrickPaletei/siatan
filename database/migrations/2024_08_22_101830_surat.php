@@ -13,10 +13,13 @@ return new class extends Migration
     {
         Schema::create('surat', function (Blueprint $table) {
             $table->id('surat_id');
+            $table->unsignedBigInteger('sub_bidang_id');
+            $table->string('jenis_surat');
             $table->string('judul_surat');
             $table->date('tanggal_surat');
-            $table->text('isi_surat');
+            $table->text('isi_surat')->nullable();
             $table->timestamps();
+            $table->foreign('sub_bidang_id')->references('sub_bidang_id')->on('sub_bidang');
         });
     }
 

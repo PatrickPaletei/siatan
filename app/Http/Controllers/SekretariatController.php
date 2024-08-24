@@ -4,42 +4,70 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\surat;
+use App\Models\sub_bidang;
+use App\Models\user_action;
+
 class SekretariatController extends Controller
 {
-    public function index()
+    protected $sub_bidang;
+
+    public function __construct()
     {
-        return view('dashboard/sekretariat');
+        // Load sub_bidang data and store it in a class property
+        $this->sub_bidang = sub_bidang::where('bidang_id', 1)->get();
     }
 
-    public function store(Request $request){
+    public function index()
+    {
+        return view('dashboard/sekretariat', [
+            'sub_bidang' => $this->sub_bidang
+        ]);
+    }
+
+    public function store(Request $request)
+    {
+        // $sub_bidang = $this->sub_bidang;
         // dd($request->all());
         $request->validate([
-            'judul_surat' => 'required|unique:surat',
+            'sub_bidang_id' => 'required',
+            'jenis_surat' => 'required',
+            'judul_surat' => 'required',
             'tanggal_surat' => 'required',
-            // 'isi_surat' => 'required|min:5' 
-        ],[
+        ], [
+            'jenis_surat.required' => 'Field jenis surat wajib diisi',
             'judul_surat.required' => 'Field judul surat wajib diisi',
             'tanggal_surat.required' => 'Field tanggal surat wajib diisi',
-            // 'password.required' => 'Field password wajib diisi'
         ]);
 
-        $surat = new surat;
+        // Initialize the Surat model
+        $surat = new Surat;
+        $surat->sub_bidang_id = $request->sub_bidang_id;
+        $surat->jenis_surat = $request->jenis_surat;
         $surat->judul_surat = $request->judul_surat;
         $surat->tanggal_surat = $request->tanggal_surat;
-        $surat->save();
+
         // Handle file upload
         if ($request->hasFile('file')) {
             $file = $request->file('file');
             $path = $file->storeAs('files', $file->getClientOriginalName());
-            
-            // Assuming 'isi_surat' is a field in the 'surat' table, you should store the file path there.
-            // Update the 'isi_surat' field in the 'surat' record
+
+            // Set the 'isi_surat' field to the file path
             $surat->isi_surat = $path;
-            $surat->save();
         }
+
+        // Save the Surat record to the database (only once)
+        $surat->save();
+
+        $suratId = $surat->surat_id;
+        $userId = auth()->user()->user_id;
+
+        $user_action = new user_action;
+        $user_action->surat_id = $suratId;
+        $user_action->bidang_id = 1;
+        $user_action->user_id = $userId;
+        $user_action->save();
+
+
         return redirect('dashboard/sekretariat')->with('berhasil', 'Berhasil Menambahkan Surat!');
-
-        // return 'Berhasil';
     }
-
 }

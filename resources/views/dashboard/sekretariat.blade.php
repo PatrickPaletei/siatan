@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="/css/sekretariat.css">
     <!-- <meta name="csrf-token" content="{{ csrf_token() }}"> -->
 </head>
+
 <body>
     <div class="profile-container">
         <img src="/asset/profile.png" alt="Profile Picture" class="profile-picture">
@@ -27,36 +29,38 @@
             <h2>UPLOAD SURAT</h2>
             <form method="post" enctype="multipart/form-data" id="uploadForm" action="{{ route('sekretariatPost') }}">
                 @csrf
-                <label for="sub-bagian">Sub Bagian</label>
-                <select id="sub-bagian" name="sub-bagian">
+                <label for="sub-bagian">Sub Bidang</label>
+                <select id="sub-bagian" name="sub_bidang_id">
                     <option value="" selected disabled>Pilih sub bagian</option>
-                    <option value="Umum dan Kepengawaian">Umum dan Kepengawaian</option>
-                    <option value="Koordinator, Perencanaan dan Evaluasi">Koordinator, Perencanaan dan Evaluasi</option>
-                    <option value="Keuangan dan Aset">Keuangan dan Aset</option>
+                    @foreach($sub_bidang as $b)
+                    <option value="{{ $b->sub_bidang_id }}">{{ $b->nama_sub_bidang }}</option>
+                    @endforeach
                 </select>
                 
-                </select>
-
                 <label for="jenis-surat">Jenis Surat</label>
-                <input type="text" id="jenis-surat" name="jenis-surat">
+                <select id="sub-bagian" name="jenis_surat">
+                    <option value="" selected disabled>Pilih Jenis Surat</option>
+                    <option value="Surat Keluar">Surat Keluar</option>
+                    <option value="Surat Masuk">Surat Masuk</option>
+                </select>
 
                 <label for="nama-surat">Judul Surat</label>
                 <input type="text" id="nama-surat" name="judul_surat"
-                @error('judul_surat') is-invalid @enderror">
+                    @error('judul_surat') is-invalid @enderror">
                 @error('judul_surat')
-                    <p >{{ $message }}</p>
+                <p>{{ $message }}</p>
                 @enderror
 
                 <label for="tanggal-upload">Tanggal Upload Surat</label>
-                <input type="date" id="tanggal-upload" name="tanggal_surat" 
-                @error('tanggal_surat') is-invalid @enderror">
+                <input type="date" id="tanggal-upload" name="tanggal_surat"
+                    @error('tanggal_surat') is-invalid @enderror">
                 @error('tanggal_surat')
-                    <p >{{ $message }}</p>
+                <p>{{ $message }}</p>
                 @enderror
 
                 <label for="file-upload">File Upload</label>
                 <input type="file" id="file-upload" name="file">
-                
+
                 <div class="buttons">
                     <button type="submit">Upload</button>
                 </div>
@@ -64,9 +68,10 @@
         </div>
     </div>
     @if (session('berhasil'))
-        <script>
-            alert("{{ session('berhasil') }}");
-        </script>
+    <script>
+        alert("{{ session('berhasil') }}");
+    </script>
     @endif
 </body>
+
 </html>

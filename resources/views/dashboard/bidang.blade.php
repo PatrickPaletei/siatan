@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SI-ATAN</title>
     <link rel="stylesheet" href="/css/bidang.css">
 </head>
+
 <body>
     <div class="container">
         <div class="sidebar">
@@ -17,8 +19,8 @@
                 <h2>SISTEM INFORMASI ARSIP KESEHATAN</h2>
                 <div class="sidebar-content">
                     <p class="beranda">Beranda</p>
-                </div>                
-            </div>            
+                </div>
+            </div>
             <button id="logout-button" class="logout-button">Logout</button>
         </div>
         <div class="main-content">
@@ -26,13 +28,33 @@
             <ul>
                 @if($bidangId == 1)
                 <li id="sekretariat">Sekretariat</li>
+                <li id="kesmas" class="disabled">Kesehatan Masyarakat</li>
+                <li id="p2p" class="disabled">Pencegahan dan Pengendalian Penyakit</li>
+                <li id="pelkes" class="disabled">Pelayanan Kesehatan</li>
+                <li id="sdk" class="disabled">Sumber Daya Kesehatan</li>
                 @elseif($bidangId == 2)
+                <li id="sekretariat" class="disabled">Sekretariat</li>
                 <li id="kesmas">Kesehatan Masyarakat</li>
+                <li id="p2p" class="disabled">Pencegahan dan Pengendalian Penyakit</li>
+                <li id="pelkes" class="disabled">Pelayanan Kesehatan</li>
+                <li id="sdk" class="disabled">Sumber Daya Kesehatan</li>
                 @elseif($bidangId == 3)
+                <li id="sekretariat" class="disabled">Sekretariat</li>
+                <li id="kesmas" class="disabled">Kesehatan Masyarakat</li>
                 <li id="p2p">Pencegahan dan Pengendalian Penyakit</li>
+                <li id="pelkes" class="disabled">Pelayanan Kesehatan</li>
+                <li id="sdk" class="disabled">Sumber Daya Kesehatan</li>
                 @elseif($bidangId == 4)
+                <li id="sekretariat" class="disabled">Sekretariat</li>
+                <li id="kesmas" class="disabled">Kesehatan Masyarakat</li>
+                <li id="p2p" class="disabled">Pencegahan dan Pengendalian Penyakit</li>
                 <li id="pelkes">Pelayanan Kesehatan</li>
+                <li id="sdk" class="disabled">Sumber Daya Kesehatan</li>
                 @elseif($bidangId == 5)
+                <li id="sekretariat" class="disabled">Sekretariat</li>
+                <li id="kesmas" class="disabled">Kesehatan Masyarakat</li>
+                <li id="p2p" class="disabled">Pencegahan dan Pengendalian Penyakit</li>
+                <li id="pelkes" class="disabled">Pelayanan Kesehatan</li>
                 <li id="sdk">Sumber Daya Kesehatan</li>
                 @else
                 <li id="sekretariat">Sekretariat</li>
@@ -74,4 +96,5 @@
     </script>
 
 </body>
+
 </html>
