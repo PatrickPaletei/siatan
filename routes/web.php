@@ -11,6 +11,7 @@ use App\Http\Controllers\P2pController;
 use App\Http\Controllers\PelayananKesehatanController;
 use App\Http\Controllers\SumberDayaKesehatanController;
 use App\Http\Controllers\LihatSuratController;
+use App\Http\Controllers\DataSuratController;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -50,4 +51,12 @@ Route::get('dashboard/sumberDayaKesehatan', [SumberDayaKesehatanController::clas
 
 Route::post('dashboard/sumberDayaKesehatan/upload', [SumberDayaKesehatanController::class, 'store'])->name('sdkPost');
 
-Route::get('dashboard/lihatSurat', [LihatSuratController::class, 'index'])->name('lihatSurat');
+Route::get('lihatsurat/{menu?}', [LihatSuratController::class, 'index'])->name('lihatSurat');
+
+Route::get('cariSurat', [LihatSuratController::class, 'findSurat'])->name('searchSurat');
+
+Route::get('detailSurat/{id}', [LihatSuratController::class, 'show'])->name('detailSurat');
+
+Route::delete('/data-surat/{surat_id}', [LihatSuratController::class, 'destroy'])->name('dataSuratDestroy');
+
+Route::get('dashboard/dataSurat', [DataSuratController::class, 'index'])->name('dataSurat');

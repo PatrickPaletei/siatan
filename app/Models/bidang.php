@@ -9,6 +9,9 @@ class bidang extends Model
 {
     use HasFactory;
     protected $table = 'bidang';
-    
-    
+
+    public function surat()
+    {
+        return $this->hasMany(surat::class, 'sub_bidang_id');
+    }
 }

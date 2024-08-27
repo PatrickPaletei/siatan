@@ -9,8 +9,15 @@ class sub_bidang extends Model
 {
     use HasFactory;
     protected $table = 'sub_bidang';
-    
-    public function bidang(){
-        return $this -> hasMany (bidang::class);
+    protected $primaryKey = 'sub_bidang_id';
+
+    public function bidang()
+    {
+        return $this->hasMany(bidang::class);
+    }
+
+    public function surat()
+    {
+        return $this->hasMany(surat::class, 'sub_bidang_id');
     }
 }

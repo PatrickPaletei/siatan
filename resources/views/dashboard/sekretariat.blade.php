@@ -21,7 +21,7 @@
             <div class="menu">
                 <button>Sekretariat</button>
                 <a href="#">Upload Surat</a>
-                <a href="{{route('lihatSurat')}}">Lihat Surat</a> <!-- Link mengarah ke halaman "Lihat Surat" -->
+                <a href="{{route('lihatSurat',['menu'=> 1])}}">Lihat Surat</a> <!-- Link mengarah ke halaman "Lihat Surat" -->
             </div>
             <button class="logout" onclick="window.location.href='{{route('bidang')}}'">Logout</button>
         </div>

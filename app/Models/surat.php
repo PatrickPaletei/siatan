@@ -17,4 +17,13 @@ class surat extends Model
         'tanggal_surat',
         'isi_surat'
     ];
+
+    public function bidang()
+    {
+        return $this->belongsTo(bidang::class, 'bidang_id');
+    }
+    public function sub_bidang()
+    {
+        return $this->belongsTo(sub_bidang::class, 'sub_bidang_id');
+    }
 }

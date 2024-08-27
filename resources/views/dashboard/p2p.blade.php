@@ -20,7 +20,7 @@
             <div class="menu">
                 <button>Pencegahan Dan Pengendalian Penyakit</button>
                 <a href="#">Upload Surat</a>
-                <a href="{{route('lihatSurat')}}">Lihat Surat</a>
+                <a href="{{route('lihatSurat',['menu'=>3])}}">Lihat Surat</a>
             </div>
             <button class="logout" onclick="window.location.href='{{route('bidang')}}'">Logout</button>
         </div>
