@@ -49,11 +49,14 @@ class SekretariatController extends Controller
         // Handle file upload
         if ($request->hasFile('file')) {
             $file = $request->file('file');
-            $path = $file->storeAs('files', $file->getClientOriginalName());
+
+            // Store the file in the 'public/files' directory using the 'public' disk
+            $path = $file->storeAs('files', $file->getClientOriginalName(), 'public');
 
             // Set the 'isi_surat' field to the file path
             $surat->isi_surat = $path;
         }
+
 
         // Save the Surat record to the database (only once)
         $surat->save();

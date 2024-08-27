@@ -60,16 +60,31 @@ class LihatSuratController extends Controller
 
     public function show(Request $request, $id)
     {
+        // Get the authenticated user
         $user = auth()->user();
         $bidangId = $user->bidang_id;
-        // dd($bidangId);
+
+        // Get the selected menu ID from the request
         $selectedMenuId = $request->input('selectedMenuId');
-        $data = surat::where('surat_id', $id)->get();
-        // dd($data);
-        return view("dashboard/detailsurat", [
-            "data" => $data,
-            "bidangId" => $bidangId,
-            "selectedMenuId" => $selectedMenuId,
+
+        // Retrieve all 'surat' records or the specific surat by id
+        $surat = surat::where('surat_id', $id)->first();
+
+        // Ensure the surat was found
+        if (!$surat) {
+            return redirect()->back()->with('error', 'Surat not found');
+        }
+
+        // If you need to pass multiple records, you could modify the query to get all records related to the user or based on some condition
+        // $all_data = surat::where('user_id', $user->id)->get(); // Example query for multiple records
+        $all_data = surat::all(); // Replace this with the appropriate query for your use case
+
+        // Pass the required data to the view
+        return view('dashboard.detailsurat', [
+            'data' => $surat,
+            'all_data' => $all_data,  // Pass all surat records
+            'bidangId' => $bidangId,
+            'selectedMenuId' => $selectedMenuId,
         ]);
     }
 

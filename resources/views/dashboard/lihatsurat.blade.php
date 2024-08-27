@@ -79,7 +79,11 @@
                             <td>{{ $surat->sub_bidang->nama_sub_bidang }}</td>
                             <td>{{ \Carbon\Carbon::parse($surat->tanggal_surat)->format('d/m/Y') }}</td>
                             <td>
-                                <a href="{{route('detailSurat',$surat->surat_id)}}" class="a-option">Detail</a>
+                                <!-- <a href="{{route('detailSurat',$surat->surat_id)}}" class="a-option">Detail</a> -->
+                                <button class="a-option" onclick="openPdf('{{ $surat->isi_surat }}')">Detail</button>
+                                <!-- Download link -->
+                                <!-- <a href="#" onclick="openPdf('{{ $surat->isi_surat }}')" class="btn btn-primary">Open PDF in New Window</a> -->
+                                <!-- <a href="{{ asset('storage/' . $surat->isi_surat) }}" target="_blank" class="a-option">Detail</a> -->
                                 <form action="{{ route('dataSuratDestroy', ['surat_id' => $surat->surat_id]) }}" method="POST" class="delete-form">
                                     @csrf
                                     @method('DELETE')
@@ -126,6 +130,14 @@
             $('#myTable').DataTable();
 
         });
+
+        function openPdf(filename) {
+            // Create the URL for the PDF based on the filename
+            const pdfUrl = "{{ url('storage/') }}" + '/' + filename;
+
+            // Open the PDF in a new window
+            window.open(pdfUrl, '_blank', 'width=800,height=600,scrollbars=yes');
+        }
     </script>
 </body>
 
